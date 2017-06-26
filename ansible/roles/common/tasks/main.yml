@@ -13,6 +13,7 @@
 - name: Determine if CoreOS
   raw: "grep '^NAME=' /etc/os-release | sed s'/NAME=//'"
   register: distro
+  changed_when: false
   check_mode: no
 
 - name: Set the is_coreos fact

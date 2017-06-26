@@ -89,7 +89,7 @@
 
 - name: Write docker daemon.conf file
   copy: src=daemon.json dest=/etc/docker/daemon.json
-  when: "{{ docker_version.stdout | regex_replace('(\\r\\n)','') | version_compare('1.12', '>=') }}"
+  when: docker_version.stdout | regex_replace('(\\r\\n)','') | version_compare('1.12', '>=')
   notify:
     - reload docker
   tags: configure
