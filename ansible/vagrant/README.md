@@ -21,7 +21,7 @@ vagrant plugin install vagrant-aws --plugin-version ">= 0.7.2"
 Vagrant uses Ansible to automate the Kubernetes deployment. Install Ansible (Mac OSX example):
 ```
 sudo easy_install pip
-sudo pip install ansible==2.0.0.2
+sudo pip install ansible==2.2.0.0
 ```
 
 Reference [Ansible installation](http://docs.ansible.com/ansible/intro_installation.html) for additional installation instructions.
