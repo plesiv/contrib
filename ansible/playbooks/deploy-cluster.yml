@@ -12,9 +12,13 @@
 
 # Install etcd
 - include: deploy-etcd.yml
+  tags:
+    - deploy-etcd
 
 # Install docker
 - include: deploy-docker.yml
+  tags:
+    - deploy-docker
 
 # install flannel
 - hosts:
@@ -43,12 +47,18 @@
 
 # install kube master services
 - include: deploy-master.yml
+  tags:
+    - kube-master
 
 # launch addons, like dns
 - include: deploy-addons.yml
+  tags:
+    - kube-addons
 
 # install kubernetes on the nodes
 - include: deploy-node.yml
+  tags:
+    - kube-node
 
 # provision opencontrail once the services are operational
 - hosts:
