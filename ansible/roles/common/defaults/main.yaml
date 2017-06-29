@@ -12,4 +12,5 @@ is_atomic: false
 is_coreos: false
 has_rpm: false
 has_firewalld: false
+firewalld_running: false
 has_iptables: false

@@ -11,6 +11,18 @@
     has_firewalld: true
   when: firewalld_check.rc == 0
 
+- name: Determine if firewalld is running
+  shell: "service firewalld status | grep --quiet 'Active.*(running)'"
+  register: firewalld_running_check
+  changed_when: false
+  failed_when: false
+  check_mode: no
+
+- name: Set the firewalld_running_check fact
+  set_fact:
+    firewalld_running: true
+  when: firewalld_running_check.rc == 0
+
 - name: Determine if iptables-services installed
   command: "rpm -q iptables-services"
   register: iptables_check

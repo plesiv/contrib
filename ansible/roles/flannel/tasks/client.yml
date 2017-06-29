@@ -18,7 +18,7 @@
 
 - set_fact:
     flannel_use_upstart: true
-  when:  "{{ ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 15 }}"
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 15
 
 - name: Install Flannel with github release
   include: github-release.yml
@@ -40,6 +40,3 @@
   template: src=flanneld.j2 dest={{ flannel_config_dir }}/flanneld
   notify:
     - restart flannel
-
-- include: etcd-certs.yml
-  when: flannel_etcd_use_certs

@@ -14,7 +14,7 @@
   when: ansible_distribution == 'Ubuntu'
 
 - include: firewalld.yml
-  when: has_firewalld
+  when: has_firewalld and firewalld_running
 
 - include: iptables.yml
   when: not has_firewalld and has_iptables
