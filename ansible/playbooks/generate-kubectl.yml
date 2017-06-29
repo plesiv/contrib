@@ -1,0 +1,23 @@
+- hosts: masters[0]
+  gather_facts: yes
+  become: yes
+  tasks:
+      - shell: kubectl --namespace=kube-system get serviceaccount default -o jsonpath="{.secrets[0].name}"
+        register: token
+      - shell: kubectl --namespace=kube-system get secret "{{ token.stdout }}" -o jsonpath="{.data.token}" | base64 -d
+        register: token_value_cli
+      - set_fact:
+          token_value: "{{ token_value_cli.stdout }}"
+      - set_fact:
+          local_pwd: "{{ lookup('env', 'PWD') }}"
+        become: no
+        delegate_to: localhost
+      - set_fact:
+          kubectl_config_file: "{{ local_pwd }}/kubectl_{{ cluster_name }}.conf"
+        become: no
+        delegate_to: localhost
+      - template:
+          src: kube-config.j2
+          dest: "{{ kubectl_config_file }}"
+        become: no
+        delegate_to: localhost
