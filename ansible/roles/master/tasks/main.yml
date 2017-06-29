@@ -58,7 +58,7 @@
 # Networking
 - name: Update firewalld to open apiserver port
   include: firewalld.yml
-  when: has_firewalld
+  when: has_firewalld and firewalld_running
   tags: configure
 
 - name: Update iptables to open apiserver port

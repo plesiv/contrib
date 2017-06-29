@@ -1,5 +1,5 @@
 - include: netmaster_firewalld.yml
-  when: has_firewalld
+  when: has_firewalld and firewalld_running
 
 - include: netmaster_iptables.yml
   when: not has_firewalld and has_iptables

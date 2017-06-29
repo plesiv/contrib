@@ -38,7 +38,7 @@
 
 # Networking
 - include: firewalld.yml
-  when: has_firewalld
+  when: has_firewalld and firewalld_running
   tags: configure
 
 - include: iptables.yml

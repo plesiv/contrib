@@ -9,7 +9,7 @@
   when: is_coreos
 
 - include: firewalld-configure.yml
-  when: has_firewalld
+  when: has_firewalld and firewalld_running
 
 - include: iptables-configure.yml
   when: not has_firewalld and has_iptables
