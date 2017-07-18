@@ -10,6 +10,19 @@
   tags:
     - pre-ansible
 
+# DNS resolution of the cluster nodes is setup on every node
+- hosts: all
+  become: yes
+  tasks:
+    - name: Add DNS resolution entries to all hosts in the cluster
+      lineinfile:
+        path: /etc/hosts
+        state: present
+        line: "{{hostvars[item]['ansible_' + cluster_network_interface]['ipv4']['address']}} {{hostvars[item]['ansible_hostname']}}"
+      with_items: "{{ groups['masters'] + groups['nodes'] + groups['etcd'] }}"
+  tags:
+    - prepare-hosts
+
 # Install etcd
 - include: deploy-etcd.yml
   tags:

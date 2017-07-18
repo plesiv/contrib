@@ -5,7 +5,7 @@ current-context: {{ cluster_name }}
 clusters:
 - cluster:
     insecure-skip-tls-verify: true
-    server: https://{{ hostvars[groups['masters'][0]]['ansible_' + etcd_interface]['ipv4']['address'] }}:{{ kube_master_api_port }}
+    server: https://{{ hostvars[groups['masters'][0]]['ansible_' + cluster_network_interface]['ipv4']['address'] }}:{{ kube_master_api_port }}
   name: {{ cluster_name }}
 contexts:
 - context:

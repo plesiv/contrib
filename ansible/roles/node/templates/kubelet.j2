@@ -14,7 +14,7 @@ KUBELET_HOSTNAME="--hostname-override={{ inventory_hostname }}"
 {% if cluster_hostname | default("") != "" %}
 KUBELET_API_SERVER="--api-servers=https://{{ cluster_hostname }}:{{ cluster_port}}"
 {% else %}
-KUBELET_API_SERVER="--api-servers=https://{{ hostvars[groups['masters'][0]]['ansible_' + etcd_interface]['ipv4']['address'] }}:{{ kube_master_api_port }}"
+KUBELET_API_SERVER="--api-servers=https://{{ groups['masters'][0] }}:{{ kube_master_api_port }}"
 {% endif %}
 
 {% if dns_setup -%}
