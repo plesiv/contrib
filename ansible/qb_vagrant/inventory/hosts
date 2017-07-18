@@ -1,0 +1,9 @@
+[masters]
+centos-n1 ansible_host=172.16.100.71
+
+[nodes]
+centos-n2 ansible_host=172.16.100.72
+centos-n3 ansible_host=172.16.100.73
+
+[etcd:children]
+masters
