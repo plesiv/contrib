@@ -57,6 +57,8 @@
   become: yes
   roles:
     - { role: contiv, contiv_role: netmaster, when: networking == 'contiv' }
+  tags:
+    - network-service-install
 
 # install kube master services
 - include: deploy-master.yml
@@ -88,3 +90,5 @@
   become: yes
   roles:
     - { role: contiv, contiv_role: netplugin, when: networking == 'contiv' }
+  tags:
+    - network-service-config
